@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fantasy Character Generator</title>
+  <title>Generator</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Moderustic:wght@800&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Funnel+Display:wght@300..800&family=Moderustic:wght@800&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
     body {
       font-family: Arial, sans-serif;
       color: #fff;
@@ -35,16 +38,44 @@
       margin-top: 20px;
     }
 
+    .butt7
+    {
+      border-radius: 10px;
+      background-color: #fff;
+      font-size: 1.2rem;
+      
+    }
+
+    .butt7:hover
+    {
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(-1px);
+      background-color:aqua;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .buttActive
+    {
+      background-color:aqua;
+    }
+
     .tab-button {
       padding: 15px 30px;
       cursor: pointer;
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: rgba(39, 42, 45, 0.8);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 1);
       border: none;
       color: white;
       font-size: 1.2em;
       margin: 0 5px;
       border-radius: 5px;
       transition: background-color 0.3s;
+      font-family: "Sour Gummy", sans-serif;
+      font-optical-sizing: auto;
+      font-style: normal;
+      font-weight: bold;
+      font-variation-settings: "wdth" 100;
     }
 
     .tab-button:hover {
@@ -71,6 +102,9 @@
       width: 80%;
       max-width: 600px;
       margin-top: 20px;
+      font-family: "Funnel Display", sans-serif;
+      font-optical-sizing: auto;
+      font-style: normal;
     }
 
     .tab-content.active-content {
@@ -96,77 +130,234 @@
       transition: background-color 0.3s;
     }
 
+    .styled 
+    {
+      padding: 15px 30px;
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.5);
+      border: none;
+      color: white;
+      font-size: 1.2em;
+      margin: 0 5px;
+      border-radius: 5px;
+      margin-bottom: 30px;
+    }
+
     .generate-button.active {
       background-color: #6a5acd;
       border-bottom: 3px solid #483d8b;
       box-shadow: 0 0 15px 5px rgba(106, 92, 205, 0.6); /* Glowing effect */
     }
+
+    .titleback
+    {
+      padding: 20px;
+      background-color: rgba(59, 63, 71, 0.8);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+      width: 80%;
+      max-width: 800px;
+      margin-top: 20px;
+      font-family: "Sour Gummy", sans-serif;
+      font-optical-sizing: auto;
+      font-style: normal;
+      font-variation-settings: "wdth" 100;
+    }
+
+    .blue
+    {
+      color: #0000EE;
+    }
+
   </style>
 </head>
-<body>
+<body onload="startUp()">
 
-  <h1>Fantasy Character Generator</h1>
+  <h1 class="titleback">Brotato Run Generator v1.0</h1>
 
   <!-- Navigation tabs -->
   <div class="tabs">
     <button class="tab-button active" onclick="showTab(0)">Home</button>
-    <button class="tab-button" onclick="showTab(1)">Generate Character</button>
-    <button class="tab-button" onclick="showTab(2)">About</button>
+    <button class="tab-button" onclick="showTab(1)">Generate Challenge</button>
+    <button class="tab-button" onclick="showTab(2)">Update Log</button>
   </div>
 
   <!-- Home tab content -->
   <div id="home" class="tab-content active-content">
-    <p>Welcome to the Fantasy Character Generator! Click "Generate Character" to create your own fantasy character.</p>
+    <p>Welcome to the brotato dungeon, where you will sink in hours till you collapse out of sheer exhaustion. That's the type of people we cater to here. Here's what you need to know:<br><br>
+      1. A basic run just chooses out of the common weapon pool, and equally weighs every character, difficulty and map.<br><br>
+      2. You may use the filters to create an ideal run for your preferences, or just get bored and ignore it anyway.<br><br>
+      3. No you cannot have a free copy of the game or dlc, stop emailing me. My email is in the update log section.</p>
   </div>
 
   <!-- Generate tab content -->
   <div id="generate" class="tab-content">
+    <input type="button" class="styled" onclick="reveal()" value="Filters">
+    <div id="wrap1">
+      <input type="button" class="butt7" id="butt1" onclick="hard()" value="Hard Mode">
+      <input type="button" class="butt7" id="butt2" onclick="any()" value="Any">
+      <input type="button" class="butt7" id="butt3" onclick="uncom()" value="UC">
+      <input type="button" class="butt7" id="butt4" onclick="rarer()" value="R">
+      <input type="button" class="butt7" id="butt5" onclick="legend()" value="L">
+      <input type="button" class="butt7" id="butt6" onclick="pain()" value="Wtf">
+      <p id="info">--</p>
+    </div>
     <button id="generateButton" class="generate-button" onclick="generateCharacter()">Generate Character</button>
     <div class="output">
-      <div id="name"></div>
-      <div id="race"></div>
-      <div id="class"></div>
+      <div id="tato"></div>
+      <div id="diff"></div>
+      <div id="map"></div>
+      <div id="weap"></div>
       <div id="background"></div>
     </div>
   </div>
+  
 
   <!-- About tab content -->
   <div id="about" class="tab-content">
-    <p>This tool allows you to generate random fantasy characters with unique names, races, classes, and backgrounds!</p>
-    <p>Created for storytelling, game development, or just for fun!</p>
+    <p>v1.0: release, non-dlc and update features all avilable. 14/11/24</p><br>
+    <p>Check out my github repo: <a class="blue" href="https://github.com/Ambush-4567">Here</a></p>
+    <p>My Email: <a class="blue" href=mailto:“brooksjohnsonjamez@gmail.com”>Here</a></p>
   </div>
 
   <script>
+    let filters = true;
+    
+
+    function startUp()
+    {
+    let bros1 = bros[Math.floor(Math.random() * bros.length)];
+    let danger1 = danger[Math.floor(Math.random() * danger.length)];
+    let weap1 = common[Math.floor(Math.random() * common.length)];
+    let map1 = maps[Math.floor(Math.random() * maps.length)];
+      reveal();
+      resetRand();
+    
+    document.getElementById('butt1').addEventListener('mouseover', () => { 
+      document.getElementById('info').innerHTML = '-Causes diffculty to be fixed at 5.-'; });
+
+      document.getElementById('butt2').addEventListener('mouseover', () => { 
+        document.getElementById('info').innerHTML = '-Chooses a weapon from any rarity pool.-'; });
+
+        document.getElementById('butt3').addEventListener('mouseover', () => { 
+          document.getElementById('info').innerHTML = '-Chooses an uncommon weapon.-'; });
+
+          document.getElementById('butt4').addEventListener('mouseover', () => { 
+            document.getElementById('info').innerHTML = '-Chooses a rare weapon.-'; });
+
+            document.getElementById('butt5').addEventListener('mouseover', () => { 
+              document.getElementById('info').innerHTML = '-Chooses a legendary weapon.-'; });
+
+              document.getElementById('butt6').addEventListener('mouseover', () => { 
+                document.getElementById('info').innerHTML = '-This can only end well.-'; });
+
+                document.getElementById('generateButton').addEventListener('mouseover', () => { 
+                  document.getElementById('info').innerHTML = '-Regular Randomsier.-'; });
+              
+    }
+    
     // Data arrays for character generation
-    const names = ["Eldrin", "Thalindra", "Rogar", "Althar", "Zephyra", "Galadriel", "Borin", "Selene"];
-    const races = ["Elf", "Dwarf", "Human", "Orc", "Werewolf", "Alien", "Hobbit", "Gnome"];
-    const classes = ["Wizard", "Warrior", "Rogue", "Paladin", "Archer", "Scholar", "Superhero", "Musician", "Blacksmith"];
-    const backgrounds = [
-      "Raised by wolves in the deep forest.",
-      "A noble born to a fallen house.",
-      "A wanderer seeking lost knowledge.",
-      "The last survivor of a destroyed city.",
-      "A former pirate turned hero.",
-      "An orphan in search of answers.",
-      "A thief with a heart of gold.",
-      "A blessed hero on a divine quest."
-    ];
+    const bros = ['Well Rounded', 'Brawler', 'Crazy', 'Ranger', 'Mage', 'Chunky', 'Old', 'Lucky', 'Mutant', 'Generalist', 'Loud', 'Multitasker', 'Wilding', 'Pacifist',
+    'Gladiator', 'Saver', 'Sick', 'Farmer', 'Ghost', 'Speedy', 'Entrepreneur', 'Engineer', 'Explorer', 'Doctor', 'Hunter', 'Artificer', 'Arms Dealer', 'Streamer',
+    'Cyborg', 'Glutton', 'Jack', 'Lich', 'Apprentice', 'Cryptid', 'Fisherman', 'Golem', 'King', 'Renegade', 'One Armed', 'Bull', 'Soldier', 'Masochist', 'Knight', 'Demon' ];
+    // array for danger level. Starting option for always 5?
+    const danger = [0, 1, 2, 3, 4, 5];
+    // common weapons. 
+    const common = ['Chopper', 'Rock', 'Spiky Shield', 'Lightning Shiv', 'Plank', 'Taser', 'Torch', 'Wand', 'Ghost Axe', 'Ghost Flint', 'Ghost Scepter', 'Shredder', 
+    'Double Barrel Shotgun', 'Laser Gun', 'Medical Gun', 'Pistol', 'Revolver', 'SMG', 'Cacti Club', 'Scissors', 'Fighting Stick', 'Jousting Lance', 'Claw', 'Knife', 
+    'Theif Dagger', 'Crossbow', 'Shuriken', 'Hatchet', 'Slingshot', 'Spear', 'Stick', 'Hand', 'Pruner', 'Screwdriver', 'Wrench', ];
+    // uncommon weapons.
+    const uncommon = ['Circular Saw', 'Flaming Knuckles', 'Hammer', 'Sword', 'Flamethrower', 'Potato Thrower', 'Rocket Launcher',];
+    // rare weapons.
+    const rare = ['Plasma Sledgehammer', 'Power Fist', 'Thunder Sword', 'Minigun', 'Nuclear Launcher', 'Obliderator', 'Sniper Gun',];
+    // legendary weapons
+    const legendary = ['Drill', 'Excalibur', 'Scythe', 'Chain Gun', 'Gatling Laser',];
+    //maps lmao
+    const maps = ['Crash Zone', 'The Abyss'];
+
+    function resetRand()
+    {
+      bros1 = bros[Math.floor(Math.random() * bros.length)];
+      danger1 = danger[Math.floor(Math.random() * danger.length)];
+      weap1 = common[Math.floor(Math.random() * common.length)];
+      map1 = maps[Math.floor(Math.random() * maps.length)];
+    }
+
+    function reveal()
+    {
+      if(filters == false) {
+        filters = true;
+        document.getElementById('wrap1').style.display = 'block';
+    } else if(filters == true) {
+        filters = false;
+        document.getElementById('wrap1').style.display = 'none';
+    }
+    }
+
+    function hard()
+    {
+      danger1 = '5';
+      generateCharacter();
+    }
+
+    function any()
+    {
+      let weapType = Math.floor(Math.random() * 4)
+
+      if (weapType == 0) {
+        weap1 = common[Math.floor(Math.random() * common.length)];
+      } else if (weapType == 1) {
+        weap1 = uncommon[Math.floor(Math.random() * uncommon.length)];
+      } else if (weapType == 2) {
+        weap1 = rare[Math.floor(Math.random() * rare.length)];
+      } else {
+        weap1 = legendary[Math.floor(Math.random() * legendary.length)];
+      }
+
+      generateCharacter();
+    }
+
+    function uncom()
+    {
+      weap1 = uncommon[Math.floor(Math.random() * uncommon.length)];
+      generateCharacter();
+    }
+
+    function rarer()
+    {
+      weap1 = rare[Math.floor(Math.random() * rare.length)];
+      generateCharacter();
+    }
+
+    function legend()
+    {
+      weap1 = legendary[Math.floor(Math.random() * legendary.length)];
+      generateCharacter();
+    }
+
+    function pain()
+    {
+      weap1 = 'Pistol';
+      bros1 = 'Fisherman';
+      danger1 = '5';
+      map1 = 'The Abyss';
+      generateCharacter();
+    }
 
     // Function to generate a random character
     function generateCharacter() {
-      const randomName = names[Math.floor(Math.random() * names.length)];
-      const randomRace = races[Math.floor(Math.random() * races.length)];
-      const randomClass = classes[Math.floor(Math.random() * classes.length)];
-      const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
+      
 
-      document.getElementById('name').innerHTML = `<strong>Name:</strong> ${randomName}`;
-      document.getElementById('race').innerHTML = `<strong>Race:</strong> ${randomRace}`;
-      document.getElementById('class').innerHTML = `<strong>Class:</strong> ${randomClass}`;
-      document.getElementById('background').innerHTML = `<strong>Background:</strong> ${randomBackground}`;
+      document.getElementById('tato').innerHTML = `<strong>Potato:</strong> ${bros1}`;
+      document.getElementById('diff').innerHTML = `<strong>Danger:</strong> ${danger1}`;
+      document.getElementById('map').innerHTML = `<strong>Map:</strong> ${map1}`;
+      document.getElementById('weap').innerHTML = `<strong>Weapon:</strong> ${weap1}`;
 
       // Add active class to the Generate button when clicked
       const generateButton = document.getElementById('generateButton');
       generateButton.classList.add('active'); // This will add the glowing effect to the button
+
+      resetRand();
     }
 
     // Function to show the selected tab
@@ -189,7 +380,7 @@
 
       // Add active class to the clicked tab button
       tabButtons[tabIndex].classList.add('active'); // Add active class to the clicked button
-    }
+    } 
   </script>
 
 </body>
