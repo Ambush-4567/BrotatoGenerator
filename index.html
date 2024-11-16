@@ -173,7 +173,7 @@
 </head>
 <body onload="startUp()">
 
-  <h1 class="titleback">Brotato Run Generator v1.0</h1>
+  <h1 class="titleback">Brotato Run Generator v1.1</h1>
 
   <!-- Navigation tabs -->
   <div class="tabs">
@@ -194,6 +194,7 @@
   <div id="generate" class="tab-content">
     <input type="button" class="styled" onclick="reveal()" value="Filters">
     <div id="wrap1">
+      <input type="button" class="butt7" id="butt7" onclick="dlcPush()" value="Add DLC Content"><br>
       <input type="button" class="butt7" id="butt1" onclick="hard()" value="Hard Mode">
       <input type="button" class="butt7" id="butt2" onclick="any()" value="Any">
       <input type="button" class="butt7" id="butt3" onclick="uncom()" value="UC">
@@ -215,6 +216,7 @@
 
   <!-- About tab content -->
   <div id="about" class="tab-content">
+    <p>v1.1: all 4 update characters are here, and all DLC characters & weapons available in filters. 16/11/24</p>
     <p>v1.0: release, non-dlc and update features all avilable. 14/11/24</p><br>
     <p>Check out my github repo: <a class="blue" href="https://github.com/Ambush-4567">Here</a></p>
     <p>My Email: <a class="blue" href=mailto:“brooksjohnsonjamez@gmail.com”>Here</a></p>
@@ -253,27 +255,37 @@
 
                 document.getElementById('generateButton').addEventListener('mouseover', () => { 
                   document.getElementById('info').innerHTML = '-Regular Randomsier.-'; });
+
+                  document.getElementById('butt7').addEventListener('mouseover', () => { 
+                    document.getElementById('info').innerHTML = '-Add DLC content into the randomizer.-'; });
               
     }
     
     // Data arrays for character generation
     const bros = ['Well Rounded', 'Brawler', 'Crazy', 'Ranger', 'Mage', 'Chunky', 'Old', 'Lucky', 'Mutant', 'Generalist', 'Loud', 'Multitasker', 'Wilding', 'Pacifist',
     'Gladiator', 'Saver', 'Sick', 'Farmer', 'Ghost', 'Speedy', 'Entrepreneur', 'Engineer', 'Explorer', 'Doctor', 'Hunter', 'Artificer', 'Arms Dealer', 'Streamer',
-    'Cyborg', 'Glutton', 'Jack', 'Lich', 'Apprentice', 'Cryptid', 'Fisherman', 'Golem', 'King', 'Renegade', 'One Armed', 'Bull', 'Soldier', 'Masochist', 'Knight', 'Demon' ];
+    'Cyborg', 'Glutton', 'Jack', 'Lich', 'Apprentice', 'Cryptid', 'Fisherman', 'Golem', 'King', 'Renegade', 'One Armed', 'Bull', 'Soldier', 'Masochist', 'Knight', 'Demon',
+    'Baby', 'Vagabond', 'Technomage', 'Vampire' ];
+
     // array for danger level. Starting option for always 5?
     const danger = [0, 1, 2, 3, 4, 5];
+
     // common weapons. 
     const common = ['Chopper', 'Rock', 'Spiky Shield', 'Lightning Shiv', 'Plank', 'Taser', 'Torch', 'Wand', 'Ghost Axe', 'Ghost Flint', 'Ghost Scepter', 'Shredder', 
     'Double Barrel Shotgun', 'Laser Gun', 'Medical Gun', 'Pistol', 'Revolver', 'SMG', 'Cacti Club', 'Scissors', 'Fighting Stick', 'Jousting Lance', 'Claw', 'Knife', 
     'Theif Dagger', 'Crossbow', 'Shuriken', 'Hatchet', 'Slingshot', 'Spear', 'Stick', 'Hand', 'Pruner', 'Screwdriver', 'Wrench', ];
+
     // uncommon weapons.
     const uncommon = ['Circular Saw', 'Flaming Knuckles', 'Hammer', 'Sword', 'Flamethrower', 'Potato Thrower', 'Rocket Launcher',];
+
     // rare weapons.
     const rare = ['Plasma Sledgehammer', 'Power Fist', 'Thunder Sword', 'Minigun', 'Nuclear Launcher', 'Obliderator', 'Sniper Gun',];
+
     // legendary weapons
     const legendary = ['Drill', 'Excalibur', 'Scythe', 'Chain Gun', 'Gatling Laser',];
+
     //maps lmao
-    const maps = ['Crash Zone', 'The Abyss'];
+    const maps = ['Crash Zone'];
 
     function resetRand()
     {
@@ -342,6 +354,28 @@
       danger1 = '5';
       map1 = 'The Abyss';
       generateCharacter();
+    }
+
+    function dlcPush()
+    {
+      //dlc characters array.
+      const dlcBros = ['Sailor', 'Curious', 'Builder', 'Captain', 'Creature', 'Chef', 'Druid', 'Dwarf', 'Gangster', 'Diver', 'Hiker', 'Buccaneer', 'Ogre', 'Romantic']
+
+      //dlc commons 
+      const dlcCommon = ['Brick', 'Flute', 'Hiking Pole', 'Javelin', 'Lute', 'Sickle', 'Spoon',]
+
+      //dlc uncommons
+      const dlcUncommon = ['Anchor', 'Blunderbuss', 'Grenade Launcher', 'Harpoon Gun', 'Mace', 'Trident']
+
+      //dlc rare
+      const dlcRare = ['Captains Sword', 'Chainsaw', 'Warhammer']
+
+      bros.push(...dlcBros);
+      common.push(...dlcCommon);
+      uncommon.push(...dlcUncommon);
+      rare.push(...dlcRare);
+      maps.push('The Abyss');
+      document.getElementById('butt7').style.display = 'none';
     }
 
     // Function to generate a random character
