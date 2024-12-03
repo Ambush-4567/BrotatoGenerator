@@ -169,17 +169,32 @@
       color: #0000EE;
     }
 
+    .quest
+    {
+      font-weight: bold;
+      text-align: left;
+      font-style: italic;
+      font-size: 1.2rem;
+    }
+
+    .ans
+    {
+      line-height: 0.9;
+      font-size: 0.9rem;
+    }
+
   </style>
 </head>
 <body onload="startUp()">
 
-  <h1 class="titleback">Brotato Run Generator v1.2</h1>
+  <h1 class="titleback">Brotato Run Generator v1.3</h1>
 
   <!-- Navigation tabs -->
   <div class="tabs">
     <button class="tab-button active" onclick="showTab(0)">Home</button>
     <button class="tab-button" onclick="showTab(1)">Generate Challenge</button>
-    <button class="tab-button" onclick="showTab(2)">Update Log</button>
+    <button class="tab-button" onclick="showTab(2)">FAQ</button>
+    <button class="tab-button" onclick="showTab(3)">Update Log</button>
   </div>
 
   <!-- Home tab content -->
@@ -201,6 +216,7 @@
       <input type="button" class="butt7" id="butt4" onclick="rarer()" value="R">
       <input type="button" class="butt7" id="butt5" onclick="legend()" value="L">
       <input type="button" class="butt7" id="butt6" onclick="pain()" value="Wtf">
+      <input type="button" class="butt7" id="butt8" onclick="doub()" value="2 Weap">
       <p id="info">--</p>
     </div>
     <button id="generateButton" class="generate-button" onclick="generateCharacter()">Generate Character</button>
@@ -212,10 +228,17 @@
       <div id="background"></div>
     </div>
   </div>
-  
+  <!--FAQ section-->
+  <div id="faq" class="tab-content">
+    <p class="quest">1. What does item rarity mean in this game?</p>
+    <p class="ans">Item rarity simply refers to the minimum rarity an item can hold. For exmaple, a fireball is an uncommon item (hence fireball II), but it can go all the way to fireball IV.</p>
+    <p class="quest">2. Does this rando have potato-unlocked weapons?</p>
+    <p class="ans">Yes, if you do not own one simply reroll. For those unaware, some weapons are locked behind winning a run with a character, E.G. the Chopper from winning a run with multitasker.</p>
+  </div>
 
   <!-- About tab content -->
   <div id="about" class="tab-content">
+    <p>v1.3: Added a multiple weapon rando and an FAQ section for info. 4/12/24</p>
     <p>v1.2: 5 update weapons were added to the general list: Icicle, Sharp Tooth, Fireball, Particle Accelerator and the DEX-troyer. 3/12/24</p>
     <p>v1.1: all 4 update characters are here, and all DLC characters & weapons available in filters. 16/11/24</p>
     <p>v1.0: release, non-dlc and update features all avilable. 14/11/24</p><br>
@@ -260,6 +283,9 @@
 
                   document.getElementById('butt7').addEventListener('mouseover', () => { 
                     document.getElementById('info').innerHTML = '-Add DLC content into the randomizer.-'; });
+
+                    document.getElementById('butt8').addEventListener('mouseover', () => { 
+                      document.getElementById('info').innerHTML = '-Generates 1 common and one random rarity weapon.-'; });
               
     }
     
@@ -355,6 +381,22 @@
       bros1 = 'Fisherman';
       danger1 = '5';
       map1 = 'The Abyss';
+      generateCharacter();
+    }
+
+    function doub()
+    {
+      let firstWeap = common[Math.floor(Math.random() * common.length)];
+      let secondWeap = Math.floor(Math.random() * 3)
+      if (secondWeap == 0) {
+        secondWeap = uncommon[Math.floor(Math.random() * uncommon.length)];
+      } else if (secondWeap == 1) {
+        secondWeap = rare[Math.floor(Math.random() * rare.length)];
+      } else {
+        secondWeap = legendary[Math.floor(Math.random() * legendary.length)];
+      }
+
+      weap1 = `The ${firstWeap} & The ${secondWeap}`;
       generateCharacter();
     }
 
